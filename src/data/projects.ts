@@ -17,7 +17,7 @@ export const projectsData: ProjectData[] = [
     playcount: '30,000+ plays',
     alignment: 'left',
     description: 'A multiplayer kart racing game with exciting tracks and power-ups. Players can compete against each other in fast-paced races.',
-    technologies: ['Roblox Studio', 'Lua', 'Game Design', 'Multiplayer Systems'],
+    technologies: ['Roblox Studio', 'React', 'Game Design', 'Multiplayer'],
     robloxLink: 'https://www.roblox.com/games/116846107054100' // TODO: Update with actual link
   },
   {
@@ -27,7 +27,7 @@ export const projectsData: ProjectData[] = [
     playcount: '40,000,000+ plays',
     alignment: 'right',
     description: 'A realistic racing simulator featuring detailed car physics and authentic driving experiences on professional race tracks.',
-    technologies: ['Roblox Studio', 'Lua'],
+    technologies: ['Roblox Studio', 'Lua', 'Multiplayer'],
     robloxLink: 'https://www.roblox.com/games/4864763388' // TODO: Update with actual link
   }
 ]
