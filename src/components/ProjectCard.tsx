@@ -5,36 +5,33 @@ interface ProjectCardProps {
   thumbnail: string
   title: string
   playcount: string
-  alignment: 'left' | 'right'
 }
 
-export function ProjectCard({ slug, thumbnail, title, playcount, alignment }: ProjectCardProps) {
+export function ProjectCard({ slug, thumbnail, title, playcount }: ProjectCardProps) {
   const navigate = useNavigate()
-  const isLeft = alignment === 'left'
-
-  const handleClick = () => {
-    navigate(`/${slug}`)
-  }
 
   return (
-    <div className={`flex flex-col md:flex-row ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}>
-      <div
-        onClick={handleClick}
-        className={`bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg overflow-hidden mx-4 md:w-1/2 cursor-pointer transition-all hover:scale-[1.02] ${isLeft ? 'hover:border-blue-500/50' : 'hover:border-purple-500/50'}`}
-      >
-        <div className="relative aspect-video bg-slate-700">
+    <div
+      onClick={() => navigate(`/${slug}`)}
+      className="flex cursor-pointer group border-b border-slate-700/30 last:border-b-0 hover:bg-slate-800/30 transition-colors duration-200"
+    >
+      <div className="w-2/5 shrink-0 bg-slate-900/60 overflow-hidden" style={{ aspectRatio: '16/9' }}>
+        {thumbnail ? (
           <img
             src={thumbnail}
-            alt={`${title} - ${playcount}`}
-            className="w-full h-full object-cover"
+            alt={title}
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-500"
           />
-          <div className="absolute inset-0 bg-linear-to-b from-transparent via-slate-900/50 to-slate-900">
-            <div className="absolute bottom-0 left-0 right-0 p-6">
-              <h3 className="text-2xl font-semibold text-white mb-2">{title}</h3>
-              <p className={`text-lg ${isLeft ? 'text-blue-400' : 'text-purple-400'}`}>{playcount}</p>
-            </div>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-slate-600 text-5xl font-bold select-none">{title[0]}</span>
           </div>
-        </div>
+        )}
+      </div>
+
+      <div className="flex-1 px-8 py-7 flex flex-col justify-center gap-1.5">
+        <h3 className="text-base font-medium text-slate-100">{title}</h3>
+        <p className="text-emerald-400 text-sm">{playcount}</p>
       </div>
     </div>
   )

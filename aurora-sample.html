@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+border-radius: 30px;
+color: #fff;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-size: 16px;
+font-weight: 500;
+letter-spacing: 0.5px;
+text-decoration: none;
+text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(79, 255, 234, 0.2);
+transition: all 0.3s ease;
+z-index: 100;
+}
+
+.aurora-button:hover {
+background: linear-gradient(135deg, rgba(124, 255, 107, 0.25), rgba(79, 255, 234, 0.25), rgba(142, 77, 255, 0.25));
+box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(79, 255, 234, 0.4);
+transform: translateX(-50%) translateY(-2px);
+border-color: rgba(255, 255, 255, 0.4);
+}
+</style>
+</head>
+
+<body>
+    <a href="https://run.gptchatly.com/boxes/polychromatic-aurora-borealis" class="aurora-button"
+        target="_blank">Optimized Aurora with Settings</a>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        const renderer = new THREE.WebGLRenderer({ antialias: false });
+
+        const settings = {
+            pixelRatio: 1.0,
+            dithering: 0.0228,
+            auroraSpeed: 0.65,
+            noiseSeed: 19.6,
+
+            colorBase: '#7CFF6B',
+            colorHigh: '#4FFFEA',
+
+
+            oxygenGreenA: '#7CFF6B',
+            oxygenGreenB: '#B6FF7A',
+
+            cyanAqua: '#4FFFEA',
+
+            blueA: '#3D7CFF',
+            blueB: '#4858FF',
+
+            violetA: '#8E4DFF',
+            violetB: '#B35CFF',
+
+            magentaA: '#FF5CCB',
+            magentaB: '#FF7AB8',
+
+            crimsonA: '#FF3D35',
+            crimsonB: '#D8192F',
+
+            whiteA: '#F4FFE8',
+            whiteB: '#FFF6B0',
+
+
+            oxygenPercent: 45.0,
+            cyanPercent: 15.0,
+            bluePercent: 12.0,
+            violetPercent: 13.0,
+</html >
+
+
+// this is what the above gptchatly content has:
+
+< !DOCTYPE html >
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Polychromatic Aurora</title>
+
+    /* original monochromatic code is by sabosugi at codepen.io/sabosugi/pen/XJjoprL */
+
+                <script type="importmap">
+                    {
+                        "imports": {
+                        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                    "lil-gui": "https://unpkg.com/lil-gui@0.19.1/dist/lil-gui.esm.min.js"
+            }
+        }
+</script>
+    
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+    
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    
+        #ui-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+    </style>
+    </head>
+    
+    <body>
+        <script type="module">
+                import * as THREE from 'three';
+                import GUI from 'lil-gui';
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+                const renderer = new THREE.WebGLRenderer({
+                    antialias: false,
+                depth: false,
+                stencil: false,
+                powerPreference: 'high-performance'
+            });
+
+                const settings = {
+                    pixelRatio: 1.0,
+                dithering: 0.0228,
+                auroraSpeed: 0.65,
+                noiseSeed: 19.6,
+
+                colorBase: '#7CFF6B',
+                colorHigh: '#4FFFEA',
+
+                oxygenGreenA: '#7CFF6B',
+                oxygenGreenB: '#B6FF7A',
+                cyanAqua: '#4FFFEA',
+                blueA: '#3D7CFF',
+                blueB: '#4858FF',
+                violetA: '#8E4DFF',
+                violetB: '#B35CFF',
+                magentaA: '#FF5CCB',
+                magentaB: '#FF7AB8',
+                crimsonA: '#FF3D35',
+                crimsonB: '#D8192F',
+                whiteA: '#F4FFE8',
+                whiteB: '#FFF6B0',
+
+                oxygenPercent: 45.0,
+                cyanPercent: 15.0,
+                bluePercent: 12.0,
+                violetPercent: 13.0,
+                magentaPercent: 8.0,
+                crimsonPercent: 5.0,
+                whitePercent: 2.0,
+
+                polychromaAmount: 0.7,
+                regionScale: 0.62,
+                regionSoftness: 1.35,
+                accentStrength: 1.15,
+                luminancePreserve: 0.0,
+
+                skyDark: '#030c1c',
+                skyDeep: '#070f1d',
+                starDensity: 0.073,
+                starSize: 0.9193,
+                starBlinkRate: 6.26,
+                starIntensity: 0.516,
+                starColor: '#61fcff'
+            };
+
+                renderer.setPixelRatio(settings.pixelRatio);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                document.body.appendChild(renderer.domElement);
+
+                const uniforms = {
+                    iResolution: {
+                    value: new THREE.Vector2(
+                window.innerWidth * settings.pixelRatio,
+                window.innerHeight * settings.pixelRatio
+                )
+                },
+                iTime: {value: 0.0 },
+                uDithering: {value: settings.dithering },
+                uSpeed: {value: settings.auroraSpeed },
+                uSeed: {value: settings.noiseSeed },
+
+                uColorBase: {value: new THREE.Color(settings.colorBase) },
+                uColorHigh: {value: new THREE.Color(settings.colorHigh) },
+
+                uOxygenGreenA: {value: new THREE.Color(settings.oxygenGreenA) },
+                uOxygenGreenB: {value: new THREE.Color(settings.oxygenGreenB) },
+                uCyanAqua: {value: new THREE.Color(settings.cyanAqua) },
+                uBlueA: {value: new THREE.Color(settings.blueA) },
+                uBlueB: {value: new THREE.Color(settings.blueB) },
+                uVioletA: {value: new THREE.Color(settings.violetA) },
+                uVioletB: {value: new THREE.Color(settings.violetB) },
+                uMagentaA: {value: new THREE.Color(settings.magentaA) },
+                uMagentaB: {value: new THREE.Color(settings.magentaB) },
+                uCrimsonA: {value: new THREE.Color(settings.crimsonA) },
+                uCrimsonB: {value: new THREE.Color(settings.crimsonB) },
+                uWhiteA: {value: new THREE.Color(settings.whiteA) },
+                uWhiteB: {value: new THREE.Color(settings.whiteB) },
+
+                uRoleThreshLo: {value: new THREE.Vector3() },
+                uRoleThreshHi: {value: new THREE.Vector3() },
+
+                uPolychromaAmount: {value: settings.polychromaAmount },
+                uRegionScale: {value: settings.regionScale },
+                uRegionSoftness: {value: settings.regionSoftness },
+                uAccentStrength: {value: settings.accentStrength },
+                uLuminancePreserve: {value: settings.luminancePreserve },
+
+                uSkyDark: {value: new THREE.Color(settings.skyDark) },
+                uSkyDeep: {value: new THREE.Color(settings.skyDeep) },
+                uStarDensity: {value: settings.starDensity },
+                uStarSize: {value: settings.starSize },
+                uStarBlinkRate: {value: settings.starBlinkRate },
+                uStarIntensity: {value: settings.starIntensity },
+                uStarColor: {value: new THREE.Color(settings.starColor) }
+            };
+
+                function updateRoleThresholds() {
+                const s = settings;
+                const total = Math.max(
+                s.oxygenPercent + s.cyanPercent + s.bluePercent + s.violetPercent +
+                s.magentaPercent + s.crimsonPercent + s.whitePercent,
+                1e-5
+                );
+                const t0 = s.oxygenPercent / total;
+                const t1 = t0 + s.cyanPercent / total;
+                const t2 = t1 + s.bluePercent / total;
+                const t3 = t2 + s.violetPercent / total;
+                const t4 = t3 + s.magentaPercent / total;
+                const t5 = t4 + s.crimsonPercent / total;
+                uniforms.uRoleThreshLo.value.set(t0, t1, t2);
+                uniforms.uRoleThreshHi.value.set(t3, t4, t5);
+            }
+                updateRoleThresholds();
+
+                const geometry = new THREE.PlaneGeometry(2, 2);
+
+                const fragmentShader = `
+                precision highp float;
+
+                uniform vec2 iResolution;
+                uniform float iTime;
+                uniform float uDithering;
+                uniform float uSpeed;
+                uniform float uSeed;
+                uniform vec3 uColorBase;
+                uniform vec3 uColorHigh;
+
+                uniform vec3 uOxygenGreenA;
+                uniform vec3 uOxygenGreenB;
+                uniform vec3 uCyanAqua;
+                uniform vec3 uBlueA;
+                uniform vec3 uBlueB;
+                uniform vec3 uVioletA;
+                uniform vec3 uVioletB;
+                uniform vec3 uMagentaA;
+                uniform vec3 uMagentaB;
+                uniform vec3 uCrimsonA;
+                uniform vec3 uCrimsonB;
+                uniform vec3 uWhiteA;
+                uniform vec3 uWhiteB;
+
+                uniform vec3 uRoleThreshLo;
+                uniform vec3 uRoleThreshHi;
+
+                uniform float uPolychromaAmount;
+                uniform float uRegionScale;
+                uniform float uRegionSoftness;
+                uniform float uAccentStrength;
+                uniform float uLuminancePreserve;
+
+                uniform vec3 uSkyDark;
+                uniform vec3 uSkyDeep;
+
+                uniform float uStarDensity;
+                uniform float uStarSize;
+                uniform float uStarBlinkRate;
+                uniform float uStarIntensity;
+                uniform vec3 uStarColor;
+
+                const float RAY_ITERATIONS = 60.0;
+                const float LUMINANCE_FACTOR = 0.05;
+
+                const float Y_OFFSET_BOTTOM = 50.0;
+                const float VOLUME_DEPTH = 75.0;
+                const vec3 BOUND_LOW = vec3(-250.0, Y_OFFSET_BOTTOM, -500.0);
+                const vec3 BOUND_HIGH = vec3(250.0, Y_OFFSET_BOTTOM + VOLUME_DEPTH, 500.0);
+
+                float saturate(float v) {
+                    return clamp(v, 0.0, 1.0);
+                }
+
+                float generateRandomFloat(vec2 seedVal) {
+                    vec3 p3 = fract(vec3(seedVal.xyx) * 0.1031);
+                p3 += dot(p3, p3.yzx + 33.33);
+                return fract((p3.x + p3.y) * p3.z);
+                }
+
+                float computeHash1(float v) {
+                    vec3 hVec = fract(vec3(v) * 0.1031);
+                hVec += dot(hVec, hVec.yzx + 19.19);
+                return fract((hVec.x + hVec.y) * hVec.z);
+                }
+
+                float computeHash3(vec3 v3) {
+                    v3 = fract(v3 * vec3(0.1031, 0.1030, 0.0973));
+                v3 += dot(v3, v3.yxz + 33.33);
+                return fract((v3.x + v3.y) * v3.z);
+                }
+
+                vec3 hash3Vec3(vec3 p) {
+                    float x = computeHash3(p + vec3(17.0, 31.0, 47.0));
+                float y = computeHash3(p + vec3(73.0, 19.0, 59.0));
+                float z = computeHash3(p + vec3(11.0, 89.0, 23.0));
+                return vec3(x, y, z);
+                }
+
+                float evaluateVolumeNoise(vec3 coord) {
+                    vec3 gridP = floor(coord);
+                vec3 fractP = fract(coord);
+                fractP = fractP * fractP * (3.0 - 2.0 * fractP);
+
+                return mix(
+                mix(
+                mix(computeHash3(gridP + vec3(0.0, 0.0, 0.0)), computeHash3(gridP + vec3(1.0, 0.0, 0.0)), fractP.x),
+                mix(computeHash3(gridP + vec3(0.0, 1.0, 0.0)), computeHash3(gridP + vec3(1.0, 1.0, 0.0)), fractP.x),
+                fractP.y
+                ),
+                mix(
+                mix(computeHash3(gridP + vec3(0.0, 0.0, 1.0)), computeHash3(gridP + vec3(1.0, 0.0, 1.0)), fractP.x),
+                mix(computeHash3(gridP + vec3(0.0, 1.0, 1.0)), computeHash3(gridP + vec3(1.0, 1.0, 1.0)), fractP.x),
+                fractP.y
+                ),
+                fractP.z
+                );
+                }
+
+                float smoothCurve(float valT) {
+                    return valT * valT * valT * (valT * (6.0 * valT - 15.0) + 10.0);
+                }
+
+                float pickGradient(float hVal, float posVal) {
+                    return mix(-posVal, posVal, step(0.5, hVal));
+                }
+
+                float calculateLineNoise(float pt) {
+                    float ptInt = floor(pt);
+                float ptFract = pt - ptInt;
+                float wght = smoothCurve(ptFract);
+                return mix(
+                pickGradient(computeHash1(ptInt), ptFract),
+                pickGradient(computeHash1(ptInt + 1.0), ptFract - 1.0),
+                wght
+                ) * 2.0;
+                }
+
+                float fractalVolumePattern(vec3 spacePt, int loopLimit) {
+                    float accum = 0.0;
+                float wghtSum = 0.0;
+                float curWght = 1.0;
+                float curFreq = 1.0;
+
+                for (int stepId = 0; stepId < 8; stepId++) {
+                        if (stepId >= loopLimit) {
+                            break;
+                        }
+
+                float nVal = evaluateVolumeNoise(spacePt * curFreq);
+                accum += (1.0 - nVal) * curWght;
+                wghtSum += curWght;
+
+                curWght *= 0.5;
+                curFreq *= 2.0;
+                    }
+
+                return clamp(accum / wghtSum, 0.0, 1.0);
+                }
+
+                float calculateRadiance(float curDist, float glowRadius, float pwr) {
+                    curDist = max(curDist, 1e-7);
+                return pow(glowRadius / curDist, pwr);
+                }
+
+                vec2 computeBoxIntersection(vec3 rOrigin, vec3 rVector, vec3 bLow, vec3 bHigh) {
+                    vec3 safeVector = sign(rVector) * max(abs(rVector), vec3(1e-6));
+                vec3 tLower = (bLow - rOrigin) / safeVector;
+                vec3 tUpper = (bHigh - rOrigin) / safeVector;
+                vec3 tm1 = min(tLower, tUpper);
+                vec3 tm2 = max(tLower, tUpper);
+                float tNearBound = max(max(tm1.x, tm1.y), tm1.z);
+                float tFarBound = min(min(tm2.x, tm2.y), tm2.z);
+                return vec2(tNearBound, tFarBound);
+                }
+
+                bool isWithinBounds(vec3 curPos) {
+                    float epsilon = 1e-4;
+                return
+                        (curPos.x > BOUND_LOW.x - epsilon) &&
+                        (curPos.y > BOUND_LOW.y - epsilon) &&
+                        (curPos.z > BOUND_LOW.z - epsilon) &&
+                (curPos.x < BOUND_HIGH.x + epsilon) &&
+                (curPos.y < BOUND_HIGH.y + epsilon) &&
+                (curPos.z < BOUND_HIGH.z + epsilon);
+                }
+
+                bool checkVolumeHit(vec3 rOrg, vec3 rDir, out float enterDist, out float travelDist) {
+                    vec2 hitPoints = computeBoxIntersection(rOrg, rDir, BOUND_LOW, BOUND_HIGH);
+
+                if (isWithinBounds(rOrg)) {
+                    hitPoints.x = 1e-4;
+                    }
+
+                enterDist = hitPoints.x;
+                travelDist = hitPoints.y - hitPoints.x;
+                    return hitPoints.x > 0.0 && (hitPoints.x < hitPoints.y);
+                }
+
+                vec3 blendAtmosphereTints(float heightRatio) {
+                    return mix(uColorBase, uColorHigh, heightRatio);
+                }
+
+                vec3 preserveLuma(vec3 originalTint, vec3 newTint) {
+                    float originalLuma = dot(originalTint, vec3(0.2126, 0.7152, 0.0722));
+                float newLuma = max(dot(newTint, vec3(0.2126, 0.7152, 0.0722)), 1e-4);
+                vec3 lumaMatchedTint = newTint * (originalLuma / newLuma);
+                return mix(newTint, lumaMatchedTint, saturate(uLuminancePreserve));
+                }
+
+                int chooseRoleFromPercent(float r) {
+                    if (r < uRoleThreshLo.x) return 0;
+                if (r < uRoleThreshLo.y) return 1;
+                if (r < uRoleThreshLo.z) return 2;
+                if (r < uRoleThreshHi.x) return 3;
+                if (r < uRoleThreshHi.y) return 4;
+                if (r < uRoleThreshHi.z) return 5;
+                return 6;
+                }
+
+                vec3 roleColor(
+                int roleId,
+                float lowerRegion,
+                float midRegion,
+                float upperRegion,
+                float veryBottom,
+                float topRegion,
+                float roleFilamentMask,
+                float roleHighlightMask,
+                float featureA,
+                float featureB
+                ) {
+                    if (roleId == 0) {
+                        return mix(uOxygenGreenA, uOxygenGreenB, saturate(0.28 + 0.32 * featureA + 0.40 * lowerRegion));
+                    }
+                if (roleId == 1) {
+                        return mix(uCyanAqua, mix(uCyanAqua, uWhiteA, 0.12), saturate(0.25 + 0.40 * featureB + 0.35 * midRegion));
+                    }
+                if (roleId == 2) {
+                        return mix(uBlueA, uBlueB, saturate(0.18 + 0.42 * featureA + 0.40 * upperRegion));
+                    }
+                if (roleId == 3) {
+                        return mix(uVioletA, uVioletB, saturate(0.10 + 0.40 * featureB + 0.50 * veryBottom));
+                    }
+                if (roleId == 4) {
+                        return mix(uMagentaA, uMagentaB, saturate(0.20 + 0.48 * featureA + 0.32 * roleFilamentMask));
+                    }
+                if (roleId == 5) {
+                        return mix(uCrimsonA, uCrimsonB, saturate(0.10 + 0.60 * topRegion + 0.30 * featureB));
+                    }
+
+                return mix(uWhiteA, uWhiteB, saturate(0.16 + 0.84 * roleHighlightMask));
+                }
+
+                vec3 buildPatchDistributedAuroraColor(
+                float heightRatio,
+                float localDensity,
+                vec3 currentPos,
+                vec3 shiftedPt
+                ) {
+                    vec3 originalTint = blendAtmosphereTints(heightRatio);
+
+                float timeFlow = iTime * uSpeed;
+
+                // Outer (accent + boost) masks — hoisted out of the inner cell loop.
+                float densityMask = saturate(localDensity * 2.2);
+                float softDensity = smoothstep(0.02, 0.58, densityMask);
+                float filamentMask = pow(densityMask, 1.7);
+                float highlightMask = pow(densityMask, 3.2);
+                float veryBottom = smoothstep(0.15, 0.0, heightRatio);
+                float lowerRegion = 1.0 - smoothstep(0.18, 0.58, heightRatio);
+                float midRegion = smoothstep(0.10, 0.48, heightRatio) * (1.0 - smoothstep(0.62, 0.92, heightRatio));
+                float upperRegion = smoothstep(0.38, 0.84, heightRatio);
+                float topRegion = smoothstep(0.68, 1.0, heightRatio);
+
+                // roleColor's internal masks used the 2.15 / 3.1 constants; preserve them as separate scalars
+                // so visual output stays bit-near-identical, but compute them once instead of 27x.
+                float roleDensityMask = saturate(localDensity * 2.15);
+                float roleHighlightMask = pow(roleDensityMask, 3.1);
+                float roleFilamentMask = pow(roleDensityMask, 1.7);
+
+                // Precompute per-role boost factors once. Each cell only needs to pick one by index.
+                float roleBoost0 = 1.00 + 0.30 * lowerRegion;
+                float roleBoost1 = 0.95 + 0.35 * midRegion;
+                float roleBoost2 = 0.95 + 0.30 * upperRegion;
+                float roleBoost3 = 0.90 + 0.60 * veryBottom + 0.20 * filamentMask;
+                float roleBoost4 = 0.95 + 0.35 * filamentMask;
+                float roleBoost5 = 0.90 + 0.60 * topRegion * (1.0 - softDensity);
+                float roleBoost6 = 0.85 + 0.80 * highlightMask;
+
+                vec3 colorDomain = vec3(
+                shiftedPt.x * 0.24 + shiftedPt.z * 0.17,
+                shiftedPt.y * 0.19 + timeFlow * 0.025,
+                shiftedPt.z * 0.21 - shiftedPt.x * 0.14 - timeFlow * 0.021
+                );
+
+                colorDomain += vec3(
+                evaluateVolumeNoise(vec3(shiftedPt.x * 0.12, shiftedPt.y * 0.11, shiftedPt.z * 0.10) + vec3(2.0, 4.0, 6.0)) * 0.55,
+                evaluateVolumeNoise(vec3(shiftedPt.z * 0.11, shiftedPt.y * 0.09, shiftedPt.x * 0.13) + vec3(1.0, 5.0, 8.0)) * 0.40,
+                evaluateVolumeNoise(vec3(shiftedPt.x * 0.10, shiftedPt.z * 0.12, shiftedPt.y * 0.08) + vec3(7.0, 2.0, 3.0)) * 0.50
+                ) * 0.65;
+
+                colorDomain *= uRegionScale * 2.0;
+
+                vec3 cellBase = floor(colorDomain);
+                vec3 cellFract = fract(colorDomain);
+
+                vec3 weightedColorSum = vec3(0.0);
+                float weightedSum = 0.0;
+
+                float sharedFeatureA = fractalVolumePattern(shiftedPt * 0.95 + vec3(1.7, 3.1, 5.9), 2);
+                float sharedFeatureB = fractalVolumePattern(shiftedPt * 1.20 + vec3(7.3, 2.9, 4.1), 2);
+
+                float falloffK = 2.4 + uRegionSoftness * 2.2;
+                vec3 jitterSeed = vec3(uSeed * 0.31, uSeed * 0.17, uSeed * 0.23);
+                vec3 roleSeedOff = vec3(13.7, 29.1, 47.3) + uSeed;
+
+                    // 7-cell neighborhood (center + 6 face neighbors). With the existing exp(-d^2 * k)
+                    // weighting (k >= 4.6 for the slider's softness range), edge and corner cells of a
+                    // 3x3x3 block contribute < 1e-4 of the center weight — visually indistinguishable.
+                #define ACCUM_CELL(OFF) { \
+                vec3 neighborCell = cellBase + (OFF); \
+                vec3 jitter = hash3Vec3(neighborCell + jitterSeed); \
+                vec3 featurePoint = (OFF) + jitter - cellFract; \
+                float distSq = dot(featurePoint, featurePoint); \
+                float localWeight = exp(-distSq * falloffK); \
+                float roleSelector = computeHash3(neighborCell + roleSeedOff); \
+                int roleId = chooseRoleFromPercent(roleSelector); \
+                vec3 roleTint = roleColor( \
+                roleId, lowerRegion, midRegion, upperRegion, veryBottom, topRegion, \
+                roleFilamentMask, roleHighlightMask, sharedFeatureA, sharedFeatureB); \
+                float roleBoost = roleBoost6; \
+                if (roleId == 0) roleBoost = roleBoost0; \
+                else if (roleId == 1) roleBoost = roleBoost1; \
+                else if (roleId == 2) roleBoost = roleBoost2; \
+                else if (roleId == 3) roleBoost = roleBoost3; \
+                else if (roleId == 4) roleBoost = roleBoost4; \
+                else if (roleId == 5) roleBoost = roleBoost5; \
+                localWeight *= roleBoost; \
+                weightedColorSum += roleTint * localWeight; \
+                weightedSum += localWeight; \
+                    }
+
+                ACCUM_CELL(vec3( 0.0,  0.0,  0.0))
+                ACCUM_CELL(vec3( 1.0,  0.0,  0.0))
+                ACCUM_CELL(vec3(-1.0,  0.0,  0.0))
+                ACCUM_CELL(vec3( 0.0,  1.0,  0.0))
+                ACCUM_CELL(vec3( 0.0, -1.0,  0.0))
+                ACCUM_CELL(vec3( 0.0,  0.0,  1.0))
+                ACCUM_CELL(vec3( 0.0,  0.0, -1.0))
+
+                #undef ACCUM_CELL
+
+                vec3 patchTint = weightedColorSum / max(weightedSum, 1e-5);
+                vec3 mixedTint = mix(originalTint, patchTint, saturate(uPolychromaAmount));
+                mixedTint = preserveLuma(originalTint, mixedTint);
+
+                vec3 accent = vec3(0.0);
+                accent += mix(uCyanAqua, uWhiteA, 0.08) * midRegion * 0.030;
+                accent += mix(uBlueA, uBlueB, 0.5) * upperRegion * 0.040;
+                accent += mix(uVioletA, uVioletB, 0.5) * veryBottom * 0.050;
+                accent += mix(uMagentaA, uMagentaB, 0.5) * filamentMask * 0.042;
+                accent += mix(uCrimsonA, uCrimsonB, 0.5) * topRegion * (1.0 - softDensity) * 0.040;
+                accent += mix(uWhiteA, uWhiteB, 0.5) * highlightMask * 0.070;
+
+                mixedTint += accent * uAccentStrength;
+
+                return mixedTint;
+                }
+
+                vec3 warpSpatialCoords(vec3 rawPos, float timeFlow) {
+                    float normHeight = (rawPos.y - Y_OFFSET_BOTTOM) / VOLUME_DEPTH;
+
+                vec3 warpedP = 0.04 * vec3(rawPos.x, 2.0 * timeFlow, 0.225 * rawPos.z + timeFlow * 0.5);
+                warpedP.xz += vec2(uSeed * 17.3, uSeed * 29.1);
+                warpedP.x += 0.3 * normHeight + 5.5 * cos(0.005 * rawPos.z);
+                warpedP.x += 0.02 * calculateLineNoise(0.1 * rawPos.z + timeFlow * 2.0);
+
+                return warpedP;
+                }
+
+                float sampleCloudThickness(vec3 localPt, out vec3 shiftedPt) {
+                    float timeFlow = iTime * uSpeed;
+                shiftedPt = warpSpatialCoords(localPt, timeFlow);
+                float basePattern = fractalVolumePattern(shiftedPt, 3);
+
+                vec3 shapePt = vec3(basePattern, localPt.y - BOUND_LOW.y, basePattern);
+
+                vec3 squishedPt = shapePt * vec3(1.0, 0.006, 1.0);
+                squishedPt.y += 0.48;
+
+                squishedPt.y += 0.015 * calculateLineNoise(1.0 * timeFlow + shiftedPt.z);
+                squishedPt.y += 0.015 * calculateLineNoise(-2.0 * timeFlow + shiftedPt.z);
+
+                float thickness = calculateRadiance(length(squishedPt), 0.55, 12.0);
+                thickness *= cos(0.13 * shiftedPt.x);
+
+                return max(0.0, thickness);
+                }
+
+                vec3 renderAtmosphericLights(vec3 camOrg, vec3 camDir, float noiseShift) {
+                    vec3 accumColor = vec3(0.0);
+                float startTrace = 0.0;
+                float traceLen = 0.0;
+
+                bool hitVolume = checkVolumeHit(camOrg, camDir, startTrace, traceLen);
+                if (!hitVolume) {
+                        return accumColor;
+                    }
+
+                float marchStep = traceLen / RAY_ITERATIONS;
+                startTrace += marchStep * (noiseShift * 0.25);
+
+                vec3 currentPos = camOrg + startTrace * camDir;
+                vec3 lightAccum = vec3(0.0);
+
+                for (float stepIdx = 0.0; stepIdx < RAY_ITERATIONS; stepIdx++) {
+                    vec3 shiftedPt;
+                float localDens = sampleCloudThickness(currentPos, shiftedPt);
+    
+                        if (localDens > 0.002) {
+                    float heightRatio = (currentPos.y - BOUND_LOW.y) / (BOUND_HIGH.y - BOUND_LOW.y);
+
+                vec3 localTint = buildPatchDistributedAuroraColor(
+                heightRatio,
+                localDens,
+                currentPos,
+                shiftedPt
+                );
+
+                lightAccum += localDens * localTint;
+                        }
+                currentPos += camDir * marchStep;
+                    }
+
+                return LUMINANCE_FACTOR * lightAccum * marchStep;
+                }
+
+                vec3 renderStarfield(vec3 viewDir, float timeFlow) {
+                    float gridScale = 400.0;
+                vec3 spaceGrid = floor(viewDir * gridScale);
+                vec3 spaceLocal = fract(viewDir * gridScale) - 0.5;
+
+                float cellHash = computeHash3(spaceGrid);
+                float threshold = 1.0 - (uStarDensity * 0.15);
+                float starExistence = step(threshold, cellHash);
+
+                float pixelSize = (gridScale * 1.5) / iResolution.y;
+                float radius = max(0.08, pixelSize) * uStarSize;
+                radius = min(radius, 0.5);
+
+                float starGlow = smoothstep(radius, 0.0, length(spaceLocal));
+                starGlow *= (0.08 / radius);
+
+                float blinkChance = fract(cellHash * 31.415);
+                float isTwinkling = step(0.85, blinkChance);
+
+                float blinkAnim = 0.3 + 0.7 * sin(
+                timeFlow * uStarBlinkRate * (1.5 + blinkChance * 2.0) + cellHash * 100.0
+                );
+
+                float twinkleFlow = mix(1.0, blinkAnim, isTwinkling);
+                vec3 starTint = mix(vec3(0.7, 0.85, 1.0), uStarColor, fract(cellHash * 13.0));
+
+                return starTint * starExistence * starGlow * twinkleFlow;
+                }
+
+                vec3 paintBackdrop(vec3 viewVec) {
+                    return mix(uSkyDark, uSkyDeep, clamp(viewVec.y * 1.5, 0.0, 1.0));
+                }
+
+                vec3 applyToneMapping(vec3 rawCol) {
+                    return clamp(
+                (rawCol * (2.51 * rawCol + 0.03)) /
+                (rawCol * (2.43 * rawCol + 0.59) + 0.14),
+                0.0,
+                1.0
+                );
+                }
+
+                mat3 buildCameraFrame(vec3 camPos, vec3 focusPt, vec3 upVec) {
+                    vec3 zAxis = normalize(focusPt);
+                vec3 xAxis = normalize(cross(zAxis, upVec));
+                vec3 yAxis = cross(xAxis, zAxis);
+                return mat3(xAxis, yAxis, -zAxis);
+                }
+
+                void main() {
+                    vec2 fragCoord = gl_FragCoord.xy;
+                vec2 screenPos = fragCoord - iResolution.xy / 2.0;
+                float focalLen = (0.5 * iResolution.y) / tan(radians(60.0) / 2.0);
+                vec3 sightVec = normalize(vec3(screenPos, -focalLen));
+
+                vec3 viewerLoc = vec3(0.0, 10.0, 0.0);
+
+                vec3 gazePoint = vec3(-0.4, 0.45, -1.0);
+                gazePoint.x += sin(iTime * 0.1) * 0.1;
+                gazePoint.y += cos(iTime * 0.05) * 0.05;
+
+                vec3 worldUp = vec3(0.0, 1.0, 0.0);
+                mat3 viewTransform = buildCameraFrame(viewerLoc, gazePoint, worldUp);
+                sightVec = normalize(viewTransform * sightVec);
+
+                float ditherShift = generateRandomFloat(fragCoord + vec2(iTime * 13.0, iTime * 27.0));
+
+                vec3 finalOutput = paintBackdrop(sightVec);
+
+                float screenY = fragCoord.y / iResolution.y;
+                float fadeMask = smoothstep(0.05, 0.4, screenY);
+
+                vec3 stars = renderStarfield(sightVec, iTime) * uStarIntensity;
+                finalOutput += stars * fadeMask;
+
+                vec3 auroraLights = renderAtmosphericLights(viewerLoc + sightVec * 10.0, sightVec, ditherShift);
+                finalOutput += auroraLights * fadeMask;
+
+                finalOutput = applyToneMapping(finalOutput);
+                finalOutput = pow(finalOutput, vec3(0.4545));
+
+                float cleanNoise = generateRandomFloat(fragCoord + vec2(iTime * 17.0, -iTime * 11.0));
+                finalOutput += (cleanNoise - 0.5) * uDithering;
+
+                gl_FragColor = vec4(finalOutput, 1.0);
+                }
+                `;
+
+                const material = new THREE.ShaderMaterial({
+                    fragmentShader,
+                    uniforms
+                });
+
+                const plane = new THREE.Mesh(geometry, material);
+                scene.add(plane);
+
+                const gui = new GUI({title: 'Aurora Settings' });
+
+                const folderDisplay = gui.addFolder('Display Settings');
+            folderDisplay.add(settings, 'pixelRatio', 0.1, 2.0).name('Resolution (DPR)').onChange((v) => {
+                    renderer.setPixelRatio(v);
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                uniforms.iResolution.value.set(window.innerWidth * v, window.innerHeight * v);
+            });
+            folderDisplay.add(settings, 'dithering', 0.0, 0.15).name('Dithering / Grain').onChange((v) => {
+                    uniforms.uDithering.value = v;
+            });
+
+                const folderMotion = gui.addFolder('Motion & Shape');
+            folderMotion.add(settings, 'auroraSpeed', 0.0, 2.0).name('Aurora Speed').onChange((v) => {
+                    uniforms.uSpeed.value = v;
+            });
+            folderMotion.add(settings, 'noiseSeed', 0.0, 100.0).name('Fractal Noise Seed').onChange((v) => {
+                    uniforms.uSeed.value = v;
+            });
+
+                const folderPalette = gui.addFolder('Color Palette');
+            folderPalette.addColor(settings, 'oxygenGreenA').name('Oxygen Green A').onChange((v) => {
+                    uniforms.uOxygenGreenA.value.set(v);
+            });
+            folderPalette.addColor(settings, 'oxygenGreenB').name('Oxygen Green B').onChange((v) => {
+                    uniforms.uOxygenGreenB.value.set(v);
+            });
+            folderPalette.addColor(settings, 'cyanAqua').name('Cyan Aqua').onChange((v) => {
+                    uniforms.uCyanAqua.value.set(v);
+            });
+            folderPalette.addColor(settings, 'blueA').name('Blue A').onChange((v) => {
+                    uniforms.uBlueA.value.set(v);
+            });
+            folderPalette.addColor(settings, 'blueB').name('Blue B').onChange((v) => {
+                    uniforms.uBlueB.value.set(v);
+            });
+            folderPalette.addColor(settings, 'violetA').name('Violet A').onChange((v) => {
+                    uniforms.uVioletA.value.set(v);
+            });
+            folderPalette.addColor(settings, 'violetB').name('Violet B').onChange((v) => {
+                    uniforms.uVioletB.value.set(v);
+            });
+            folderPalette.addColor(settings, 'magentaA').name('Magenta A').onChange((v) => {
+                    uniforms.uMagentaA.value.set(v);
+            });
+            folderPalette.addColor(settings, 'magentaB').name('Magenta B').onChange((v) => {
+                    uniforms.uMagentaB.value.set(v);
+            });
+            folderPalette.addColor(settings, 'crimsonA').name('Crimson A').onChange((v) => {
+                    uniforms.uCrimsonA.value.set(v);
+            });
+            folderPalette.addColor(settings, 'crimsonB').name('Crimson B').onChange((v) => {
+                    uniforms.uCrimsonB.value.set(v);
+            });
+            folderPalette.addColor(settings, 'whiteA').name('White A').onChange((v) => {
+                    uniforms.uWhiteA.value.set(v);
+            });
+            folderPalette.addColor(settings, 'whiteB').name('White B').onChange((v) => {
+                    uniforms.uWhiteB.value.set(v);
+            });
+
+                const folderWeights = gui.addFolder('Palette Percentages');
+                folderWeights.add(settings, 'oxygenPercent', 0.0, 100.0, 0.1).name('Oxygen Green 45%').onChange(updateRoleThresholds);
+                folderWeights.add(settings, 'cyanPercent', 0.0, 100.0, 0.1).name('Cyan Aqua 15%').onChange(updateRoleThresholds);
+                folderWeights.add(settings, 'bluePercent', 0.0, 100.0, 0.1).name('Blue 12%').onChange(updateRoleThresholds);
+                folderWeights.add(settings, 'violetPercent', 0.0, 100.0, 0.1).name('Violet 13%').onChange(updateRoleThresholds);
+                folderWeights.add(settings, 'magentaPercent', 0.0, 100.0, 0.1).name('Magenta 8%').onChange(updateRoleThresholds);
+                folderWeights.add(settings, 'crimsonPercent', 0.0, 100.0, 0.1).name('Crimson 5%').onChange(updateRoleThresholds);
+                folderWeights.add(settings, 'whitePercent', 0.0, 100.0, 0.1).name('White 2%').onChange(updateRoleThresholds);
+
+                const folderPolychroma = gui.addFolder('Polychromatism');
+            folderPolychroma.add(settings, 'polychromaAmount', 0.0, 1.0, 0.001).name('Polychroma Amount').onChange((v) => {
+                    uniforms.uPolychromaAmount.value = v;
+            });
+            folderPolychroma.add(settings, 'regionScale', 0.15, 2.0, 0.001).name('Region Scale').onChange((v) => {
+                    uniforms.uRegionScale.value = v;
+            });
+            folderPolychroma.add(settings, 'regionSoftness', 0.2, 3.0, 0.001).name('Region Softness').onChange((v) => {
+                    uniforms.uRegionSoftness.value = v;
+            });
+            folderPolychroma.add(settings, 'accentStrength', 0.0, 2.5, 0.001).name('Accent Strength').onChange((v) => {
+                    uniforms.uAccentStrength.value = v;
+            });
+            folderPolychroma.add(settings, 'luminancePreserve', 0.0, 1.0, 0.001).name('Preserve Original Light').onChange((v) => {
+                    uniforms.uLuminancePreserve.value = v;
+            });
+
+                const folderSky = gui.addFolder('Background Sky');
+            folderSky.addColor(settings, 'skyDark').name('Horizon Color').onChange((v) => {
+                    uniforms.uSkyDark.value.set(v);
+            });
+            folderSky.addColor(settings, 'skyDeep').name('Zenith Color').onChange((v) => {
+                    uniforms.uSkyDeep.value.set(v);
+            });
+
+                folderDisplay.close();
+                folderMotion.close();
+                folderWeights.close();
+                folderPolychroma.close();
+                folderSky.close();
+
+                gui.close();
+    
+            window.addEventListener('resize', () => {
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                uniforms.iResolution.value.set(
+                window.innerWidth * settings.pixelRatio,
+                window.innerHeight * settings.pixelRatio
+                );
+            });
+
+                const clock = new THREE.Clock();
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                uniforms.iTime.value = clock.getElapsedTime();
+                renderer.render(scene, camera);
+            }
+
+                animate();
+        </script>
+    </body>
+    
+    </html>
