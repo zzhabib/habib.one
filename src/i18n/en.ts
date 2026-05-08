@@ -98,8 +98,8 @@ export const en = {
     ],
   },
   contact: {
-    title: "Let's work together.",
-    body: "I'm always looking forward to embarking on new challenges and solving hard technical problems. If you're building something ambitious, I'd love to hear from you.",
+    title: "Let's build together.",
+    body: "If you're building something that demands both technical depth and creative vision, I'd love to be part of it.",
     email: 'Email me',
     github: 'GitHub',
     linkedin: 'LinkedIn',

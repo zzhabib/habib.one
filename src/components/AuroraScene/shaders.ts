@@ -185,7 +185,10 @@ void main() {
   vec3 fillColor = vec3(0.016, 0.043, 0.086);
   vec3 wireColor = vec3(0.055, 0.133, 0.208);
 
-  vec3 col = mix(wireColor, fillColor * (0.15 + diff * 0.85), edgeFactor());
+  float snow = smoothstep(4.5, 8.0, vWorldPos.y);
+  vec3 snowWire = mix(wireColor, vec3(0.42, 0.52, 0.65), snow);
+
+  vec3 col = mix(snowWire, fillColor * (0.15 + diff * 0.85), edgeFactor());
   gl_FragColor = vec4(col, 1.0);
 }
 `

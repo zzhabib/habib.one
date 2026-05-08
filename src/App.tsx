@@ -133,19 +133,21 @@ function App() {
           {t.hero.greeting}
         </p>
         <h1
-          className="font-bold tracking-[-0.03em] text-white/92 leading-none"
-          style={{
-            fontSize: 'clamp(56px,8vw,96px)',
-            animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 350ms both',
-          }}
+          className="text-5xl md:text-6xl font-bold tracking-[-0.03em] text-white/92 leading-none"
+          style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 350ms both' }}
         >
           Zachary Habib
         </h1>
         <p
-          className="text-xl font-light text-white/55 mt-4"
+          className="flex flex-wrap justify-center items-center gap-y-1 text-xl font-light text-white/55 mt-4"
           style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 500ms both' }}
         >
-          {t.hero.title}
+          {t.hero.title.split('・').map((part, i, arr) => (
+            <span key={i} className="whitespace-nowrap">
+              {part.trim()}
+              {i < arr.length - 1 && <span className="opacity-40 mx-2">・</span>}
+            </span>
+          ))}
         </p>
         <div
           className="flex gap-6 mt-9"
