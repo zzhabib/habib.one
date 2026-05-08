@@ -16,7 +16,7 @@ const LangContext = createContext<LangContextType | null>(null)
 const strings: Record<Lang, Strings> = { en, ja }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>('en')
+  const [lang, setLang] = useState<Lang>(navigator.language.startsWith('ja') ? 'ja' : 'en')
   return (
     <LangContext.Provider value={{ lang, setLang, t: strings[lang] }}>
       {children}

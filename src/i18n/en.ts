@@ -1,8 +1,7 @@
 export const en = {
   hero: {
     greeting: "Hi, I'm",
-    title: 'Software Engineer',
-    jlpt: 'JLPT N2 Certified',
+    title: 'Software Engineer ・ Game Dev ・ Japanese Learner',
   },
   sections: {
     about: 'About',
@@ -13,7 +12,7 @@ export const en = {
   },
   about: {
     title: 'Perpetually leveling up.',
-    p1: "I'm a Software Engineer who builds fun games and fast systems. I led development of Kart Wars, a multiplayer kart-racing game on Roblox with 4M+ plays. At CME Group, I build real-time risk management systems. I've been self-studying Japanese for over 4 years, always looking for the next challenge to push my limits.",
+    p1: "I'm a Software Engineer who builds fun games and fast systems. I led development of Kart Wars, a multiplayer kart-racing game on Roblox with 4M+ plays. At CME Group, I build real-time risk management systems. I've been self-studying Japanese for over 4 years. Always looking for the next challenge to push my limits.",
     statN2: 'Japanese Language Proficiency (JLPT)',
     stat40m: 'Plays across shipped Roblox games',
     statMCS: 'M.C.S. Computer Science — ASU 2025',

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Mail, Star } from 'lucide-react'
+import { Mail } from 'lucide-react'
 
 const GithubIcon = () => (
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -147,13 +147,6 @@ function App() {
         >
           {t.hero.title}
         </p>
-        <span
-          className="inline-flex items-center gap-1.5 mt-4 font-mono text-[12px] px-3.5 py-1.5 rounded-full border border-emerald-400/40 text-emerald-400 bg-emerald-400/[0.08]"
-          style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 620ms both' }}
-        >
-          <Star size={12} />
-          {t.hero.jlpt}
-        </span>
         <div
           className="flex gap-6 mt-9"
           style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 750ms both' }}

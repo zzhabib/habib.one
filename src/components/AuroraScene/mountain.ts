@@ -5,7 +5,7 @@ import { mountainVertexShader, mountainFragmentShader } from './shaders'
 // barycentric coordinates — shared vertices in indexed geometry would alias
 // and break the per-triangle edge detection in the fragment shader.
 export function buildMountainMesh(): THREE.Mesh {
-  const geo = new THREE.PlaneGeometry(60, 100, 30, 48).toNonIndexed()
+  const geo = new THREE.PlaneGeometry(160, 100, 80, 48).toNonIndexed()
 
   const count = geo.attributes.position.count
   const bary  = new Float32Array(count * 3)
