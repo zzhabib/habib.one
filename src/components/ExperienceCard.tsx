@@ -19,8 +19,7 @@ export function ExperienceCard({ company, dateLabel, period, roles }: Experience
 
   return (
     <div
-      className="reveal grid gap-8 p-7 border border-white/8 rounded-2xl bg-white/[0.035] backdrop-blur-lg transition-all duration-300 hover:border-white/16 hover:shadow-[0_0_28px_rgba(0,0,0,0.18)]"
-      style={{ gridTemplateColumns: '160px 1fr' }}
+      className="reveal grid grid-cols-1 md:grid-cols-[160px_1fr] gap-4 md:gap-8 p-5 md:p-7 border border-white/8 rounded-2xl bg-white/[0.035] backdrop-blur-lg transition-all duration-300 hover:border-white/16 hover:shadow-[0_0_28px_rgba(0,0,0,0.18)]"
     >
       <div className="font-mono text-[11px] text-white/30 leading-relaxed pt-1">
         <span className="block font-mono text-[10px] tracking-widest uppercase text-emerald-400 mb-1">

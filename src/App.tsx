@@ -190,15 +190,12 @@ function App() {
       <div className="relative z-10">
 
         {/* About */}
-        <section id="about" className="max-w-4xl mx-auto px-12 py-24">
+        <section id="about" className="max-w-4xl mx-auto px-5 md:px-12 py-16 md:py-24">
           <SectionEyebrow label={t.sections.about} />
           <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-12 leading-[1.1]">
             {t.about.title}
           </h2>
-          <div
-            className="reveal grid gap-16 items-start"
-            style={{ gridTemplateColumns: '1fr 1fr' }}
-          >
+          <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
             <div className="text-base leading-[1.75] text-white/55">
               <p>{t.about.p1}</p>
             </div>
@@ -213,12 +210,12 @@ function App() {
         <Divider />
 
         {/* Projects */}
-        <section id="projects" className="max-w-4xl mx-auto px-12 py-24">
+        <section id="projects" className="max-w-4xl mx-auto px-5 md:px-12 py-16 md:py-24">
           <SectionEyebrow label={t.sections.projects} />
           <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-12 leading-[1.1]">
             {t.projects.title}
           </h2>
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {displayProjectSlugs.map((slug) => {
               const project = projectsData.find((p) => p.slug === slug)
               const entry = t.projects.entries[slug as keyof typeof t.projects.entries]
@@ -226,7 +223,7 @@ function App() {
               const linkLabel =
                 project.linkType === 'roblox' ? t.projects.viewRoblox : t.projects.viewProject
               return (
-                <div key={slug} className={cn('reveal', project.featured && 'col-span-2')}>
+                <div key={slug} className={cn('reveal', project.featured && 'md:col-span-2')}>
                   <ProjectCard
                     link={project.link}
                     thumbnail={project.thumbnail}
@@ -248,7 +245,7 @@ function App() {
         <Divider />
 
         {/* Experience */}
-        <section id="experience" className="max-w-4xl mx-auto px-12 py-24">
+        <section id="experience" className="max-w-4xl mx-auto px-5 md:px-12 py-16 md:py-24">
           <SectionEyebrow label={t.sections.experience} />
           <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-12 leading-[1.1]">
             {t.experience.title}
@@ -269,12 +266,12 @@ function App() {
         <Divider />
 
         {/* Skills */}
-        <section id="skills" className="max-w-4xl mx-auto px-12 py-24">
+        <section id="skills" className="max-w-4xl mx-auto px-5 md:px-12 py-16 md:py-24">
           <SectionEyebrow label={t.sections.skills} />
           <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-12 leading-[1.1]">
             {t.skills.title}
           </h2>
-          <div className="reveal grid grid-cols-3 gap-6">
+          <div className="reveal grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.skills.groups.map((group) => (
               <div key={group.label}>
                 <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/30 mb-3">
@@ -306,7 +303,7 @@ function App() {
         <Divider />
 
         {/* Contact */}
-        <section id="contact" className="max-w-4xl mx-auto px-12 py-24">
+        <section id="contact" className="max-w-4xl mx-auto px-5 md:px-12 py-16 md:py-24">
           <div className="max-w-lg mx-auto text-center">
             <SectionEyebrow label={t.sections.contact} centered />
             <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-6 leading-[1.1]">

@@ -87,9 +87,8 @@ export function ProjectCard({
         'group bg-white/[0.035] backdrop-blur-md border border-white/8 rounded-2xl p-7 cursor-pointer',
         'hover:border-emerald-400/35 hover:shadow-[0_0_32px_oklch(0.72_0.22_155/0.12)] hover:-translate-y-0.75',
         'transition-all duration-300',
-        featured ? 'grid gap-8 items-center' : 'flex flex-col',
+        featured ? 'grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center' : 'flex flex-col',
       )}
-      style={featured ? { gridTemplateColumns: '1fr 1fr' } : undefined}
     >
       {content}
       {featured && imageSlot}

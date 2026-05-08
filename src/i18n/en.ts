@@ -11,8 +11,8 @@ export const en = {
     contact: 'Contact',
   },
   about: {
-    title: 'Perpetually leveling up.',
-    p1: "I'm a Software Engineer who builds fun games and fast systems. I led development of Kart Wars, a multiplayer kart-racing game on Roblox with 4M+ plays. At CME Group, I build real-time risk management systems. I've been self-studying Japanese for over 4 years. Always looking for the next challenge to push my limits.",
+    title: 'Engineered with intention.',
+    p1: "I'm a Software Engineer driven to build high-impact experiences. I turn complex problems into elegant solutions, and I care deeply about the craft behind every decision. I thrive at the intersection of engineering, creativity, and curiosity.",
     statN2: 'Japanese Language Proficiency (JLPT)',
     stat40m: 'Plays across shipped Roblox games',
     statMCS: 'M.C.S. Computer Science — ASU 2025',

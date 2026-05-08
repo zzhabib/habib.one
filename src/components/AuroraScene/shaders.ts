@@ -117,15 +117,43 @@ attribute vec3 barycentric;
 varying vec3 vBarycentric;
 varying vec3 vWorldPos;
 
+float hash(vec2 p) {
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+// Gradient (Perlin-like) noise, output mapped to [0, 1]
+vec2 grad(vec2 i) { float a = hash(i) * 6.28318530; return vec2(cos(a), sin(a)); }
+float perlin(vec2 p) {
+  vec2 i = floor(p), f = fract(p);
+  vec2 u = f * f * f * (f * (f * 6.0 - 15.0) + 10.0);
+  return 0.5 + 0.5 * mix(
+    mix(dot(grad(i),             f),              dot(grad(i + vec2(1,0)), f - vec2(1,0)), u.x),
+    mix(dot(grad(i + vec2(0,1)), f - vec2(0,1)), dot(grad(i + vec2(1,1)), f - vec2(1,1)), u.x),
+    u.y
+  );
+}
+
+// Ridged multifractal: each octave folds noise into a sharp ridge (cusp at n=0.5),
+// then layers finer detail on top — produces continuous mountain ranges with sharp peaks.
+float ridgedFBM(vec2 p) {
+  float h = 0.0, amp = 1.0;
+  for (int i = 0; i < 5; i++) {
+    float r = 1.0 - abs(perlin(p) * 2.0 - 1.0);
+    h   += r * r * amp;
+    amp *= 0.5;
+    p   *= 2.07;
+  }
+  return h * 0.516; // normalise: geometric sum ≈ 1.938 → ~1.0
+}
+
 void main() {
   vec3 pos = position;
-  float x = pos.x;
-  float y = pos.y;
-  float h =
-    sin(x * 0.14 + 0.5) * cos(y * 0.07 - 0.3) * 3.8 +
-    sin(x * 0.26 - y * 0.11 + 1.2) * 1.6 +
-    sin(x * 0.48 + y * 0.19 - 0.8) * 0.7;
-  pos.z = max(0.0, h);
+  vec2 p = vec2(pos.x, pos.y) * 0.038;
+
+  // Ramp height to zero near the camera (low pos.y = close) so the foreground stays open.
+  float distScale = smoothstep(-20.0, 40.0, pos.y);
+  float h = ridgedFBM(p) * 16.0 * distScale;
+  pos.z = max(0.0, h - 6.0 * distScale);
 
   vec4 worldPos = modelMatrix * vec4(pos, 1.0);
   vWorldPos    = worldPos.xyz;
