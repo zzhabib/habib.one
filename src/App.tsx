@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Mail } from 'lucide-react'
 
-const GithubIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+const GithubIcon = ({ size = 13 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
   </svg>
 )
 
-const LinkedinIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+const LinkedinIcon = ({ size = 13 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
     <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
     <rect x="2" y="9" width="4" height="12"/>
     <circle cx="4" cy="4" r="2"/>
@@ -67,8 +67,8 @@ function Nav() {
         <button
           onClick={() => setLang('en')}
           className={cn(
-            'font-mono text-[11px] px-[9px] py-[3px] rounded-[4px] transition-all duration-150 tracking-[0.05em]',
-            lang === 'en' ? 'bg-emerald-400/[0.18] text-emerald-400' : 'text-white/30 hover:text-white/60',
+            'font-mono text-[12px] px-[9px] py-[3px] rounded-[4px] transition-all duration-150 tracking-[0.05em]',
+            lang === 'en' ? 'bg-emerald-400/[0.18] text-emerald-400' : 'text-white/45 hover:text-white/75',
           )}
         >
           EN
@@ -76,8 +76,8 @@ function Nav() {
         <button
           onClick={() => setLang('ja')}
           className={cn(
-            'font-mono text-[11px] px-[9px] py-[3px] rounded-[4px] transition-all duration-150 tracking-[0.05em]',
-            lang === 'ja' ? 'bg-emerald-400/[0.18] text-emerald-400' : 'text-white/30 hover:text-white/60',
+            'font-mono text-[12px] px-[9px] py-[3px] rounded-[4px] transition-all duration-150 tracking-[0.05em]',
+            lang === 'ja' ? 'bg-emerald-400/[0.18] text-emerald-400' : 'text-white/45 hover:text-white/75',
           )}
         >
           JP
@@ -91,7 +91,7 @@ function SectionEyebrow({ label, centered = false }: { label: string; centered?:
   return (
     <p
       className={cn(
-        'reveal font-mono text-[11px] tracking-[0.18em] uppercase text-emerald-400 mb-3 flex items-center gap-3',
+        'reveal font-mono text-[12px] tracking-[0.18em] uppercase text-emerald-400 mb-3 flex items-center gap-3',
         centered && 'justify-center',
       )}
     >
@@ -103,15 +103,15 @@ function SectionEyebrow({ label, centered = false }: { label: string; centered?:
 
 function StatCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex items-baseline gap-3 px-5 py-4 bg-white/[0.03] border border-white/8 rounded-xl">
-      <span className="font-mono text-3xl font-bold text-emerald-400 leading-none">{value}</span>
-      <span className="text-sm text-white/55 leading-snug">{label}</span>
+    <div className="px-5 py-4 bg-white/3 border border-white/8 rounded-xl">
+      <span className="font-mono text-3xl font-bold text-emerald-400 leading-none block mb-1">{value}</span>
+      <span className="text-sm text-white/75 leading-snug">{label}</span>
     </div>
   )
 }
 
 function Divider() {
-  return <div className="relative z-10 h-px bg-white/8" />
+  return <div className="relative z-10 h-px bg-white/14" />
 }
 
 function App() {
@@ -127,7 +127,7 @@ function App() {
       {/* ── Hero ── */}
       <section className="relative z-10 min-h-screen flex flex-col items-center justify-center text-center px-6">
         <p
-          className="font-mono text-[12px] tracking-[0.2em] uppercase text-emerald-400 mb-5"
+          className="font-mono text-[15px] tracking-[0.2em] uppercase text-emerald-400 mb-5"
           style={{ animation: 'fadeUp 800ms cubic-bezier(0.16,1,0.3,1) 200ms both' }}
         >
           {t.hero.greeting}
@@ -139,7 +139,7 @@ function App() {
           Zachary Habib
         </h1>
         <p
-          className="flex flex-wrap justify-center items-center gap-y-1 text-xl font-light text-white/55 mt-4"
+          className="flex flex-wrap justify-center items-center gap-y-1 text-xl font-normal text-white/78 mt-4"
           style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 500ms both' }}
         >
           {t.hero.title.split('・').map((part, i, arr) => (
@@ -150,33 +150,33 @@ function App() {
           ))}
         </p>
         <div
-          className="flex gap-6 mt-9"
+          className="flex gap-2 mt-9"
           style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 750ms both' }}
         >
           <a
             href="mailto:zach.habib16@gmail.com"
-            className="font-mono text-[12px] tracking-[0.08em] uppercase text-white/30 hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+            aria-label="Email"
+            className="inline-flex items-center p-3 rounded-xl backdrop-blur-md bg-white/4.5 border border-emerald-400/35 text-emerald-400 hover:bg-white/8 hover:border-emerald-400/65 hover:shadow-[0_0_20px_oklch(0.72_0.22_155/0.28)] transition-all duration-200"
           >
-            <Mail size={13} />
-            Email
+            <Mail size={17} />
           </a>
           <a
             href="https://github.com/zzhabib"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-[12px] tracking-[0.08em] uppercase text-white/30 hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+            aria-label="GitHub"
+            className="inline-flex items-center p-3 rounded-xl backdrop-blur-md bg-white/4.5 border border-emerald-400/35 text-emerald-400 hover:bg-white/8 hover:border-emerald-400/65 hover:shadow-[0_0_20px_oklch(0.72_0.22_155/0.28)] transition-all duration-200"
           >
-            <GithubIcon />
-            GitHub
+            <GithubIcon size={17} />
           </a>
           <a
             href="https://www.linkedin.com/in/zachary-habib"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-[12px] tracking-[0.08em] uppercase text-white/30 hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+            aria-label="LinkedIn"
+            className="inline-flex items-center p-3 rounded-xl backdrop-blur-md bg-white/4.5 border border-emerald-400/35 text-emerald-400 hover:bg-white/8 hover:border-emerald-400/65 hover:shadow-[0_0_20px_oklch(0.72_0.22_155/0.28)] transition-all duration-200"
           >
-            <LinkedinIcon />
-            LinkedIn
+            <LinkedinIcon size={17} />
           </a>
         </div>
         <div
@@ -184,7 +184,7 @@ function App() {
           style={{ animation: 'fadeUp 900ms cubic-bezier(0.16,1,0.3,1) 1000ms both' }}
         >
           <div className="w-px h-10 bg-linear-to-b from-transparent to-emerald-400 pulse-line" />
-          <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-white/20">Scroll</span>
+          <span className="font-mono text-[11px] tracking-[0.15em] uppercase text-white/45">Scroll</span>
         </div>
       </section>
 
@@ -197,8 +197,8 @@ function App() {
           <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-12 leading-[1.1]">
             {t.about.title}
           </h2>
-          <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-            <div className="text-base leading-[1.75] text-white/55">
+          <div className="reveal bg-white/4.5 backdrop-blur-md border border-white/14 rounded-2xl p-7 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+            <div className="text-base leading-[1.75] text-white/78">
               <p>{t.about.p1}</p>
             </div>
             <div className="flex flex-col gap-4">
@@ -273,10 +273,10 @@ function App() {
           <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-12 leading-[1.1]">
             {t.skills.title}
           </h2>
-          <div className="reveal grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="reveal bg-white/4.5 backdrop-blur-md border border-white/14 rounded-2xl p-7 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
             {t.skills.groups.map((group) => (
               <div key={group.label}>
-                <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/30 mb-3">
+                <p className="font-mono text-[12px] tracking-[0.14em] uppercase text-white/55 mb-3">
                   {group.label}
                 </p>
                 <div className="flex flex-wrap gap-1.5">
@@ -286,10 +286,10 @@ function App() {
                       <span
                         key={chip}
                         className={cn(
-                          'font-mono text-[11px] px-3 py-1.5 rounded-full border transition-all duration-200 cursor-default',
+                          'font-mono text-[13px] px-3 py-1.5 rounded-full border transition-all duration-200 cursor-default',
                           isGreen
-                            ? 'border-emerald-400/40 text-emerald-400'
-                            : 'border-white/8 text-white/55 hover:border-emerald-400/50 hover:text-emerald-400 hover:shadow-[0_0_12px_oklch(0.72_0.22_155/0.15)]',
+                            ? 'border-emerald-400/60 text-emerald-400'
+                            : 'border-white/18 text-white/75 hover:border-emerald-400/50 hover:text-emerald-400 hover:shadow-[0_0_12px_oklch(0.72_0.22_155/0.15)]',
                         )}
                       >
                         {chip}
@@ -311,31 +311,31 @@ function App() {
             <h2 className="reveal text-[clamp(28px,4vw,44px)] font-bold tracking-[-0.02em] text-white/92 mb-6 leading-[1.1]">
               {t.contact.title}
             </h2>
-            <p className="reveal text-[15px] leading-[1.7] text-white/55 mb-10">{t.contact.body}</p>
+            <p className="reveal text-[15px] leading-[1.7] text-white/78 mb-10">{t.contact.body}</p>
             <div className="reveal flex justify-center gap-4 flex-wrap">
               <a
                 href="mailto:zach.habib16@gmail.com"
-                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.08em] uppercase px-5 py-3 rounded-lg bg-emerald-400 text-slate-950 font-medium hover:shadow-[0_0_28px_oklch(0.72_0.22_155/0.45)] hover:-translate-y-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.08em] uppercase px-5 py-3 rounded-xl backdrop-blur-md bg-emerald-400/12 border border-emerald-400/35 text-emerald-400 hover:bg-emerald-400/22 hover:border-emerald-400/65 hover:shadow-[0_0_20px_oklch(0.72_0.22_155/0.28)] transition-all duration-200"
               >
-                <Mail size={13} />
+                <Mail size={15} />
                 {t.contact.email}
               </a>
               <a
                 href="https://www.linkedin.com/in/zachary-habib"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.08em] uppercase px-5 py-3 rounded-lg border border-white/8 text-white/55 hover:border-white/16 hover:text-white/92 hover:-translate-y-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.08em] uppercase px-5 py-3 rounded-xl backdrop-blur-md bg-emerald-400/12 border border-emerald-400/35 text-emerald-400 hover:bg-emerald-400/22 hover:border-emerald-400/65 hover:shadow-[0_0_20px_oklch(0.72_0.22_155/0.28)] transition-all duration-200"
               >
-                <LinkedinIcon />
+                <LinkedinIcon size={15} />
                 {t.contact.linkedin}
               </a>
               <a
                 href="https://github.com/zzhabib"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.08em] uppercase px-5 py-3 rounded-lg border border-white/8 text-white/55 hover:border-white/16 hover:text-white/92 hover:-translate-y-0.5 transition-all duration-300"
+                className="inline-flex items-center gap-2 font-mono text-[12px] tracking-[0.08em] uppercase px-5 py-3 rounded-xl backdrop-blur-md bg-emerald-400/12 border border-emerald-400/35 text-emerald-400 hover:bg-emerald-400/22 hover:border-emerald-400/65 hover:shadow-[0_0_20px_oklch(0.72_0.22_155/0.28)] transition-all duration-200"
               >
-                <GithubIcon />
+                <GithubIcon size={15} />
                 {t.contact.github}
               </a>
             </div>

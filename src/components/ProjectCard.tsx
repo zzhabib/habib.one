@@ -16,7 +16,7 @@ interface ProjectCardProps {
 const chipColorMap = {
   green: 'border-emerald-400/45 text-emerald-400',
   cyan: 'border-cyan-400/45 text-cyan-400',
-  default: 'border-white/8 text-white/30',
+  default: 'border-white/18 text-white/60',
 }
 
 export function ProjectCard({
@@ -33,7 +33,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   const content = (
     <div className="flex flex-col">
-      <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-white/30 mb-1.5">{eyebrow}</p>
+      <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-white/55 mb-1.5">{eyebrow}</p>
       <div className="flex items-baseline gap-2.5 mb-2">
         <h3 className="text-lg font-medium text-white/92 leading-snug">{title}</h3>
         {playcount && (
@@ -42,14 +42,14 @@ export function ProjectCard({
           </span>
         )}
       </div>
-      <p className="text-[14px] leading-[1.65] text-white/55 flex-1">{description}</p>
+      <p className="text-[15px] leading-[1.65] text-white/78 flex-1">{description}</p>
       <div className="flex gap-1.5 flex-wrap mt-3">
         {chips.map((chip) => {
           const color = chipColors[chip] ?? 'default'
           return (
             <span
               key={chip}
-              className={cn('font-mono text-[10px] px-2.25 py-0.75 rounded-full border', chipColorMap[color])}
+              className={cn('font-mono text-[11px] px-2.25 py-0.75 rounded-full border', chipColorMap[color])}
             >
               {chip}
             </span>
@@ -84,7 +84,7 @@ export function ProjectCard({
     <div
       onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}
       className={cn(
-        'group bg-white/[0.035] backdrop-blur-md border border-white/8 rounded-2xl p-7 cursor-pointer',
+        'group bg-white/4.5 backdrop-blur-md border border-white/14 rounded-2xl p-7 cursor-pointer',
         'hover:border-emerald-400/35 hover:shadow-[0_0_32px_oklch(0.72_0.22_155/0.12)] hover:-translate-y-0.75',
         'transition-all duration-300',
         featured ? 'grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center' : 'flex flex-col',

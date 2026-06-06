@@ -23,7 +23,7 @@ export const projectsData: ProjectData[] = [
   {
     slug: 'kosma',
     thumbnail: '',
-    link: 'https://habib.one/kosma',
+    link: 'https://github.com/zzhabib/kosma',
     linkType: 'external',
   },
   {
