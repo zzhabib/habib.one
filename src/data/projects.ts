@@ -9,7 +9,7 @@ export interface ProjectData {
 export const projectsData: ProjectData[] = [
   {
     slug: 'kart-wars',
-    thumbnail: 'https://tr.rbxcdn.com/180DAY-d754b15c1cfc286b489ad212b272fa8c/768/432/Image/Webp/noFilter',
+    thumbnail: '/kart-wars-thumbnail.webp',
     link: 'https://www.roblox.com/games/116846107054100',
     linkType: 'roblox',
     featured: true,
